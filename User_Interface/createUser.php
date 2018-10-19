@@ -1,10 +1,10 @@
 <?php
-    $mysqli = new mysqli("mysql.eecs.ku.edu", "e155p319", "eecs448", "eecs448");
+    $mysqli = new mysqli("mysql.eecs.ku.edu", "e155p319", "eecs448", "e155p319");
 
     /* check connection */
-    if ($mysqli->connect_errno) {
-    printf("Connect failed: %s\n", $mysqli->connect_error);
-    exit();
+    if ($mysqli->connect_error) {
+        printf("Connect failed: %s\n", $mysqli->connect_error);
+        exit();
     }
 
     $username = $_POST["username"];
@@ -15,20 +15,18 @@
         /* fetch associative array */
         if ($row = $result->fetch_assoc()) {
             // tell the user its not valid, and stay there
-            printf("Username already exists");
+            echo "Username already exists" ;
         }
         else {
             // create entry
-            $entry = "INSERT INTO Users (user_id)
-            Values ('$username')";
-            printf("Valid username");
+            $entry = "INSERT INTO Users(user_id) VALUES ('$username')";
         }
 
-
-        if ($myqli->query($entry) === TRUE) {
+        if ($mysqli->query($entry) === TRUE) {
             echo "New record created successfully";
-        } else {
-            echo "Error: " . $entry . "<br>" . $mysqli->error;
+        }
+        else {
+            echo "Error: " ;
         }
 
         /* free result set */
