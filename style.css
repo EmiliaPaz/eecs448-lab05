@@ -1,0 +1,20 @@
+.row {
+    height: 40px;
+    margin: 10px;
+    padding-top: 25px;
+    background-color:  #2e4053;
+    text-align: center;
+}
+
+.row:hover{
+    background-color:  #5d6d7e ;
+}
+
+.header {
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
