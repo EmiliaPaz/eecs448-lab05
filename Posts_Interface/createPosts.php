@@ -2,8 +2,8 @@
     $mysqli = new mysqli("mysql.eecs.ku.edu", "e155p319", "eecs448", "e155p319");
 
     /* check connection */
-    if ($mysqli->connect_error) {
-        printf("Connect failed: %s\n", $mysqli->connect_error);
+    if ($mysqli->connect_errno) {
+        printf("Connect failed: %s\n", $mysqli->connect_errno);
         exit();
     }
 
@@ -15,9 +15,10 @@
         $query = "SELECT * FROM Users WHERE user_id = $username" ;
 
         // Username exists
-        if ($result = $mysqli->query($query)) {
+        $result = mysqli_query($mysqli, "SELECT * FROM Users WHERE user_id='$username';");
+        if (mysqli_num_rows($result)){
             // Create post
-            $post = "INSERT INTO Posts(content,author_id) VALUES ('$message','$username')";
+            $post = "INSERT INTO Posts (content,author_id) VALUES ('$message','$username')";
             if ($mysqli->query($post) === TRUE) {
                 echo "New record created successfully";
             }

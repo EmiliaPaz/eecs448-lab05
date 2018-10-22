@@ -3,15 +3,22 @@
 <html>
 	<head>
 		<title> Posts Interface </title>
+        <link rel="stylesheet" href="createPosts.css">
 	</head>
 
 	<body>
-        <form action="createPosts.php" method="post">
+        <div class="wrapper">
+          <form class="form-signin" action="createPosts.php" method="post">
+            <h2 class="form-signin-heading"> Create Post</h2>
             <label> Username </label>
-            <input type="text" name="username" placeholder="username"> </input> </br>
+            <input type="text" class="form-control" name="username" required=""/>
             <label> Message </label>
-            <textarea type="text" name="message"> </textarea> </br>
-            <input type="submit" name="submit" value="Submit"> </input>
-        </form>
+            <textarea type="text" class="form-control" name="message" required="" cols="32"/> </textarea>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+          </form>
+        </div>
+
+
+
 	</body>
 </html>
