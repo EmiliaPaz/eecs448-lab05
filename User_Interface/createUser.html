@@ -3,13 +3,16 @@
 <html>
 	<head>
 		<title> User </title>
+        <link rel="stylesheet" href="createUser.css">
 	</head>
 
 	<body>
-        <form action="createUser.php" method="post">
+        <div class="wrapper">
+          <form class="form-signin" action="createUser.php" method="post">
+            <h2 class="form-signin-heading"> Create User</h2>
             <label> Username </label>
-            <input type="text" name="username" placeholder="username"> </input> </br>
+            <input type="text" class="form-control" name="username" required=""/>
             <input type="submit" name="submit" value="Submit"> </input>
-        </form>
+          </form>
 	</body>
 </html>
