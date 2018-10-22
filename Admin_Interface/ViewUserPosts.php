@@ -9,8 +9,6 @@
 	</head>
 
 	<body>
-        <h2> Users Post </h2>
-
          <?php
              $mysqli = new mysqli("mysql.eecs.ku.edu", "e155p319", "eecs448", "e155p319");
              /* check connection */
@@ -28,13 +26,13 @@
 
          <?php
              $username = $_POST["username"];
-             echo $username;
-             $posts = "SELECT * FROM Posts WHERE author_id='$username' ";
+             echo " <h2> ". $username . " posts: </h2>";
+             $posts = "SELECT * FROM Posts WHERE author_id='$username'; ";
 
              if ($result = $mysqli->query($posts)) {
-                 // Get all users
-                  echo "here";
-                 while ($posts_row = $result->fetch_assoc()) {
+                 echo "if";
+                 // Get all posts from the user
+                  while ($posts_row = $result->fetch_assoc()){
                      echo "while";
                      $post_id = $posts_row['post_id'];
                      $content = $posts_row['content'];
@@ -51,7 +49,7 @@
              ?>
          </table>
 
-        </p> <a href="AdminHome.html"> Go back </a> </p>
+     </p> <a href="ViewUserPosts_form.php"> Go back </a> </p>
 
          <?php
          /* close connection */
