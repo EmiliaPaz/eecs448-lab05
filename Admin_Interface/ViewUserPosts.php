@@ -8,7 +8,7 @@
 	</head>
 
 	<body>
-        <h2> Users </h2>
+        <h2> Users Post </h2>
 
          <?php
              $mysqli = new mysqli("mysql.eecs.ku.edu", "e155p319", "eecs448", "e155p319");
@@ -21,18 +21,25 @@
 
          <table class="table table-striped" >
              <tr>
-                 <th scope="col"> User ID </th>
+                 <th scope="col"> Post ID </th>
+                 <th scope="col"> Content </th>
              </tr>
 
          <?php
-             $users = "SELECT * FROM Users";
-             if ($result = $mysqli->query($users)) {
+             $username = $_POST["username"];
+             echo $username;
+             $posts = "SELECT * FROM Posts WHERE author_id='$username' ";
+             if ($result = $mysqli->query($posts)) {
                  // Get all users
-                 while ($users_row = $result->fetch_assoc()) {
-                     $user_id = $users_row['user_id'];
+                  echo "here";
+                 while ($posts_row = $result->fetch_assoc()) {
+                     echo "while";
+                     $post_id = $posts_row['post_id'];
+                     $content = $posts_row['content'];
                      ?>
                      <tr>
-                         <td> <?php echo $user_id; ?> </td>
+                         <th> <?php echo $post_id; ?> </th>
+                         <th> <?php echo $content; ?> </th>
                      </tr>
                  <?php
                  }

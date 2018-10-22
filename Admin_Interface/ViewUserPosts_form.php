@@ -2,47 +2,42 @@
 
 <html>
 	<head>
-		<title>  View Users </title>
+		<title>  View User Posts </title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" href="ViewUsers.css">
 	</head>
 
 	<body>
-        <h2> Users </h2>
+        <h2> User Posts </h2>
 
          <?php
              $mysqli = new mysqli("mysql.eecs.ku.edu", "e155p319", "eecs448", "e155p319");
              /* check connection */
-             if ($mysqli->connect_errni) {
+             if ($mysqli->connect_errno) {
                  printf("Connect failed: %s\n", $mysqli->connect_errno);
                  exit();
              }
          ?>
-
-         <table class="table table-striped" >
-             <tr>
-                 <th scope="col"> User ID </th>
-             </tr>
-
-         <?php
-             $users = "SELECT * FROM Users";
-             if ($result = $mysqli->query($users)) {
-                 // Get all users
-                 while ($users_row = $result->fetch_assoc()) {
-                     $user_id = $users_row['user_id'];
-                     ?>
-                     <tr>
-                         <td> <?php echo $user_id; ?> </td>
-                     </tr>
-                 <?php
-                 }
-                 /* free result set */
-                 $result->free();
-             }
-             ?>
-         </table>
-
-        </p> <a href="AdminHome.html"> Go back </a> </p>
+         <form action="ViewUserPosts.php" method="post">
+             <select name="username">
+                <?php
+                     $posts = "SELECT * FROM Users";
+                     if ($result = $mysqli->query($posts)) {
+                         // Get all users
+                         while ($posts_row = $result->fetch_assoc()) {
+                             $author_id = $posts_row['user_id'];
+                             ?>
+                             <option value=" <?php echo $author_id; ?>"> <?php echo $author_id; ?> </option>
+                         <?php
+                         }
+                         /* free result set */
+                         $result->free();
+                     }
+                 ?>
+             </select>
+             <input type="submit" value="Submit">
+         </form>
+         </p> <a href="AdminHome.html"> Go back </a> </p>
 
          <?php
          /* close connection */
