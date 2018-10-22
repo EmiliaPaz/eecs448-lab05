@@ -2,14 +2,14 @@
 
 <html>
 	<head>
-		<title>  View Users </title>
+		<title> Delete Post </title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" href="ViewUsers.css">
         <link rel="stylesheet" href="admin.css">
 	</head>
 
 	<body>
-        <h2> Users Post </h2>
+        <h2> Delete Posts </h2>
 
          <?php
              $mysqli = new mysqli("mysql.eecs.ku.edu", "e155p319", "eecs448", "e155p319");
@@ -20,36 +20,39 @@
              }
          ?>
 
-         <table class="table table-striped" >
-             <tr>
-                 <th scope="col"> Post ID </th>
-                 <th scope="col"> Content </th>
-             </tr>
+         <form action="DeletePosts.php" method="post">
+             <table class="table table-striped" >
+                 <tr>
+                     <th scope="col"> Post ID </th>
+                     <th scope="col"> Content </th>
+                     <th scope="col"> Author </th>
+                     <th scope="col"> Delete </th>
+                 </tr>
 
-         <?php
-             $username = $_POST["username"];
-             echo $username;
-             $posts = "SELECT * FROM Posts WHERE author_id='$username' ";
-
-             if ($result = $mysqli->query($posts)) {
-                 // Get all users
-                  echo "here";
-                 while ($posts_row = $result->fetch_assoc()) {
-                     echo "while";
-                     $post_id = $posts_row['post_id'];
-                     $content = $posts_row['content'];
-                     ?>
-                     <tr>
-                         <th> <?php echo $post_id; ?> </th>
-                         <th> <?php echo $content; ?> </th>
-                     </tr>
-                 <?php
+             <?php
+                 $users = "SELECT * FROM Posts";
+                 if ($result = $mysqli->query($users)) {
+                     // Get all users
+                     while ($posts_row = $result->fetch_assoc()) {
+                         $post_id = $posts_row['post_id'];
+                         $content = $posts_row['content'];
+                         $author_id = $posts_row['author_id'];
+                         ?>
+                         <tr>
+                             <td> <?php echo $post_id; ?> </td>
+                             <td> <?php echo $content; ?> </td>
+                             <td> <?php echo $author_id; ?> </td>
+                             <td> <input type="checkbox" name="check_list[]" value=" <?php echo $post_id; ?>"  > </td>
+                         </tr>
+                     <?php
+                     }
+                     /* free result set */
+                     $result->free();
                  }
-                 /* free result set */
-                 $result->free();
-             }
-             ?>
-         </table>
+                 ?>
+             </table>
+             <input type="submit" value="Delete">
+         </form>
 
         </p> <a href="AdminHome.html"> Go back </a> </p>
 
