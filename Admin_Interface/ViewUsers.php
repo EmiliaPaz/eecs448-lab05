@@ -43,7 +43,7 @@
              ?>
          </table>
 
-        </p> <a href="AdminHome.html"> Go back </a> </p>
+        <p> <a href="AdminHome.html"> Go back </a> </p>
 
          <?php
          /* close connection */

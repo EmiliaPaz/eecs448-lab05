@@ -28,7 +28,7 @@
                          while ($posts_row = $result->fetch_assoc()) {
                              $author_id = $posts_row['user_id'];
                              ?>
-                             <option value=" <?php echo $author_id; ?>"> <?php echo $author_id; ?> </option>
+                             <option value="<?php echo $author_id; ?>"> <?php echo $author_id; ?> </option>
                          <?php
                          }
                          /* free result set */

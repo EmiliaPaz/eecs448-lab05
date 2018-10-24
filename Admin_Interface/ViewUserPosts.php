@@ -27,13 +27,14 @@
          <?php
              $username = $_POST["username"];
              echo " <h2> ". $username . " posts: </h2>";
-             $posts = "SELECT * FROM Posts WHERE author_id='$username'; ";
+             $posts = "SELECT * FROM Posts WHERE author_id='$username'";
+             echo "Query string: " . $posts . "<br>";
+
 
              if ($result = $mysqli->query($posts)) {
-                 echo "if";
+                 $row_count = mysqli_num_rows($result);
                  // Get all posts from the user
                   while ($posts_row = $result->fetch_assoc()){
-                     echo "while";
                      $post_id = $posts_row['post_id'];
                      $content = $posts_row['content'];
                      ?>
@@ -48,40 +49,6 @@
              }
              ?>
          </table>
-
-
-
-         <table class="table table-striped" >
-             <tr>
-                 <th scope="col"> Post ID </th>
-                 <th scope="col"> Content </th>
-             </tr>
-
-         <?php
-             $xx = $_POST["username"];
-             echo " <h2> ". $xx . " posts: </h2>";
-             $users = "SELECT * FROM Posts WHERE author_id=$xx; ";
-             if ($result = $mysqli->query($users)) {
-                  echo "if";
-                 // Get all users
-                 while ($posts_row = $result->fetch_assoc()) {
-                     echo "while";
-                     $post_id = $posts_row['post_id'];
-                     $content = $posts_row['content'];
-                     ?>
-                     <tr>
-                         <th> <?php echo $post_id; ?> </th>
-                         <th> <?php echo $content; ?> </th>
-                     </tr>
-                 <?php
-                 }
-                 /* free result set */
-                 $result->free();
-             }
-             ?>
-         </table>
-
-
 
 
      </p> <a href="ViewUserPosts_form.php"> Go back </a> </p>
